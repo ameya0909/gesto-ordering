@@ -1,4 +1,5 @@
 var Todo = require('./models/todo');
+var Menu = require('./models/menuModel');
 
 function getTodos(res) {
     Todo.find(function (err, todos) {
@@ -20,6 +21,18 @@ module.exports = function (app) {
     app.get('/api/todos', function (req, res) {
         // use mongoose to get all todos in the database
         getTodos(res);
+    });
+
+    app.get('/api/menu', function (req, res) {
+        Menu.find(function (err, foods) {
+
+            // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+            if (err) {
+                res.send(err);
+            }
+            //console.log(foods);
+            res.json(foods); // return all foods from menu collection in JSON format
+        });
     });
 
     // create todo and send back all todos after creation
