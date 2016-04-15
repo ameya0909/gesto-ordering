@@ -22,11 +22,11 @@
             padding-top: 50px;
         }
 
-        #todo-list {
+        #order-list {
             margin-bottom: 30px;
         }
 
-        #todo-form {
+        #order-form {
             margin-bottom: 50px;
         }
     </style>
@@ -44,14 +44,14 @@
 <body ng-controller="mainController">
 <div class="container">
 
-    <!-- HEADER AND TODO COUNT -->
+    <!-- HEADER -->
     <div class="jumbotron text-center">
         <h1> Place Order </h1>
     </div>
 
 
     <!-- FORM TO CREATE ORDER -->
-    <div id="todo-form" class="row">
+    <div id="order-form" class="row">
         <div class="col-sm-8 col-sm-offset-2 text-center">
             <form>
                 <div class="form-group">
@@ -66,8 +66,8 @@
         </div>
     </div>
 
-    <!-- TODO LIST -->
-    <div id="todo-list" class="row">
+    <!-- ORDER LIST -->
+    <div id="order-list" class="row">
         <div class="col-sm-4 col-sm-offset-4">
 
             <h2 align="center">Your Order</h2>
@@ -75,7 +75,8 @@
             <!-- LOOP OVER THE FOODS IN $scope.foods -->
             <div class="checkbox" ng-repeat="food in foods">
                 <label>
-                    <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ food.name }}
+                    <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ food.name }} &nbsp;&nbsp;&nbsp;
+                    {{food.price | currency}}
                 </label>
             </div>
 

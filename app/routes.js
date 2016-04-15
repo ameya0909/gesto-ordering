@@ -41,10 +41,18 @@ module.exports = function (app) {
         // create a food order, information comes from AJAX request from Angular
         var name = req.body.name;
         // find food from menu collection matching the name selected from dropdown
-        
+        var query = Menu.findOne({'name': name});
+
+        // selecting the price field
+        query.select('price');
+
+        query.exec(function (err, item) {
+            if (err) return handleError(err);
+            //console.log(price);
+
             Order.create({
                 name: name,
-                price: 8.99
+                price: item.price
             }, function (err, order) {
                 if (err)
                     res.send(err);
@@ -53,6 +61,8 @@ module.exports = function (app) {
                 getOrder(res);
             });
         });
+    });
+
 
 
     // delete a todo
