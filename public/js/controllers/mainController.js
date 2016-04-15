@@ -69,4 +69,18 @@ angular.module('mainController', [])
                     $scope.total = data; // assign our new list of foods
                 });
         };
+
+        // DELETE ==================================================================
+        // delete entire order
+        $scope.clearOrder = function (id) {
+            $scope.loading = true;
+
+            Foods.clear(id)
+                // if successful creation, call our get function to get all the new foods
+                .success(function (data) {
+                    $scope.loading = false;
+                    $scope.foods = data; // assign our new list of foods
+                    $scope.calculateTotal();
+                });
+        };
     }]);

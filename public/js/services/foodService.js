@@ -15,6 +15,9 @@ angular.module('foodService', [])
             },
             calculate: function () {
                 return $http.get('/api/total');
+            },
+            clear: function () {
+                return $http.delete('/api/clear');
             }
         }
     }]);

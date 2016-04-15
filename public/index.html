@@ -54,9 +54,11 @@
 
     <!-- HEADER -->
     <div class="jumbotron text-center">
-        <h1> Place Order </h1>
+        <h1> Emeril's Food Truck </h1>
     </div>
 
+    <h1 class="text-center">Place Order</h1>
+    <br>
 
     <!-- FORM TO CREATE ORDER -->
     <div id="order-form" class="row">
@@ -71,6 +73,8 @@
                 <!-- createOrder() WILL CREATE NEW ORDER -->
                 <button type="submit" class="btn btn-primary btn-lg" ng-click="createOrder()">Add</button>
             </form>
+            <br>
+            <button class="btn btn-danger" ng-click="clearOrder()" ng-hide="foods.length===0">Clear Order</button>
         </div>
     </div>
 
@@ -81,11 +85,12 @@
             <h2 align="center">Your Order</h2>
 
             <!-- LOOP OVER THE FOODS IN $scope.foods -->
-            <div class="checkbox" ng-repeat="food in foods">
-                <label>
-                    <input type="checkbox" ng-click="deleteFood(food._id)"> {{ food.name }} &nbsp;&nbsp;&nbsp;
-                    {{food.price | currency}}
-                </label>
+            <div ng-repeat="food in foods">
+
+                <p style="font-size: large">
+                    <button class="btn btn-danger btn-sm" ng-click="deleteFood(food._id)">Remove</button>
+                    &nbsp;&nbsp;&nbsp; {{ food.name }} &nbsp;&nbsp;&nbsp; {{food.price | currency}}
+                </p>
             </div>
             <br>
             <p style="font-size: large" align="right" ng-hide="total.total===0">Tax: 9.5%</p>
