@@ -1,1 +1,1 @@
-angular.module('foodOrdering', ['todoController', 'todoService', 'menuService']);
+angular.module('foodOrdering', ['mainController', 'foodService', 'menuService']);

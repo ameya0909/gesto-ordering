@@ -1,28 +1,22 @@
-var Todo = require('./models/todo');
+var Order = require('./models/orderModel');
 var Menu = require('./models/menuModel');
 
-function getTodos(res) {
-    Todo.find(function (err, todos) {
+function getOrder(res) {
+    Order.find(function (err, foods) {
 
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
         if (err) {
             res.send(err);
         }
-
-        res.json(todos); // return all todos in JSON format
+        //console.log(foods);
+        res.json(foods); // return all foods in JSON format
     });
 }
-;
 
 module.exports = function (app) {
 
     // api ---------------------------------------------------------------------
-    // get all todos
-    app.get('/api/todos', function (req, res) {
-        // use mongoose to get all todos in the database
-        getTodos(res);
-    });
-
+    // get all foods from menu for dropdown
     app.get('/api/menu', function (req, res) {
         Menu.find(function (err, foods) {
 
@@ -35,22 +29,31 @@ module.exports = function (app) {
         });
     });
 
-    // create todo and send back all todos after creation
-    app.post('/api/todos', function (req, res) {
+    // get all foods to display on home page
+    app.get('/api/food', function (req, res) {
+        // use mongoose to get all foods from order collection in the database
+        getOrder(res);
+    });
 
-        // create a todo, information comes from AJAX request from Angular
-        Todo.create({
-            text: req.body.text,
-            done: false
-        }, function (err, todo) {
-            if (err)
-                res.send(err);
+    // create order and send back all foods after creation
+    app.post('/api/food', function (req, res) {
+        //console.log(req.body.name);
+        // create a food order, information comes from AJAX request from Angular
+        var name = req.body.name;
+        // find food from menu collection matching the name selected from dropdown
+        
+            Order.create({
+                name: name,
+                price: 8.99
+            }, function (err, order) {
+                if (err)
+                    res.send(err);
 
-            // get and return all the todos after you create another
-            getTodos(res);
+                // get and return all the foods after you create another
+                getOrder(res);
+            });
         });
 
-    });
 
     // delete a todo
     app.delete('/api/todos/:todo_id', function (req, res) {

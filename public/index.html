@@ -35,7 +35,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script><!-- load angular -->
 
     <script src="js/controllers/mainController.js"></script> <!-- load up our controller -->
-    <script src="js/services/todos.js"></script> <!-- load our todo service -->
+    <script src="js/services/foodService.js"></script> <!-- load our food service -->
     <script src="js/services/menuService.js"></script> <!-- load our menu service -->
     <script src="js/core.js"></script> <!-- load our main application -->
 
@@ -50,7 +50,7 @@
     </div>
 
 
-    <!-- FORM TO CREATE TODOS -->
+    <!-- FORM TO CREATE ORDER -->
     <div id="todo-form" class="row">
         <div class="col-sm-8 col-sm-offset-2 text-center">
             <form>
@@ -60,8 +60,8 @@
                     </select>
                 </div>
 
-                <!-- createToDo() WILL CREATE NEW TODOS -->
-                <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
+                <!-- createOrder() WILL CREATE NEW ORDER -->
+                <button type="submit" class="btn btn-primary btn-lg" ng-click="createOrder()">Add</button>
             </form>
         </div>
     </div>
@@ -70,11 +70,12 @@
     <div id="todo-list" class="row">
         <div class="col-sm-4 col-sm-offset-4">
 
+            <h2 align="center">Your Order</h2>
 
-            <!-- LOOP OVER THE TODOS IN $scope.todos -->
-            <div class="checkbox" ng-repeat="todo in todos">
+            <!-- LOOP OVER THE FOODS IN $scope.foods -->
+            <div class="checkbox" ng-repeat="food in foods">
                 <label>
-                    <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.text }}
+                    <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ food.name }}
                 </label>
             </div>
 
