@@ -78,6 +78,25 @@ module.exports = function (app) {
         });
     });
 
+    // cacluate total
+    app.get('/api/total', function (req, res) {
+
+        Order.find(function (err, foods) {
+
+            // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+            if (err) {
+                res.send(err);
+            }
+            //console.log(foods);
+            var subTotal = 0;
+            for (var i = 0; i < foods.length; i++) {
+                var food = foods[i];
+                subTotal += food.price;
+            }
+            var total = subTotal + (0.075 * subTotal);
+            res.json({total: total});
+        });
+    });
 
     // application -------------------------------------------------------------
     app.get('*', function (req, res) {

@@ -29,6 +29,14 @@
         #order-form {
             margin-bottom: 50px;
         }
+
+        label {
+            font-size: large
+        }
+
+        h3 {
+            text-align: right
+        }
     </style>
 
     <!-- SPELLS -->
@@ -41,7 +49,7 @@
 
 </head>
 <!-- SET THE CONTROLLER -->
-<body ng-controller="mainController">
+<body ng-controller="mainController" ng-init="calculateTotal()">
 <div class="container">
 
     <!-- HEADER -->
@@ -75,11 +83,13 @@
             <!-- LOOP OVER THE FOODS IN $scope.foods -->
             <div class="checkbox" ng-repeat="food in foods">
                 <label>
-                    <input type="checkbox" ng-click="deleteTodo(food._id)"> {{ food.name }} &nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" ng-click="deleteFood(food._id)"> {{ food.name }} &nbsp;&nbsp;&nbsp;
                     {{food.price | currency}}
                 </label>
             </div>
-
+            <br>
+            <p style="font-size: large" align="right" ng-hide="total.total===0">Tax: 9.5%</p>
+            <h3>Total: {{total.total | currency}} </h3>
             <p class="text-center" ng-show="loading">
                 <span class="fa fa-spinner fa-spin fa-3x"></span>
             </p>

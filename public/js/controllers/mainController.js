@@ -39,6 +39,7 @@ angular.module('mainController', [])
                         //$scope.formData = {}; // clear the form so our user is ready to enter another
                         //console.log(data);
                         $scope.foods = data; // assign our new list of foods
+                        $scope.calculateTotal();
                     });
             }
         };
@@ -53,6 +54,19 @@ angular.module('mainController', [])
                 .success(function (data) {
                     $scope.loading = false;
                     $scope.foods = data; // assign our new list of foods
+                    $scope.calculateTotal();
+                });
+        };
+
+        //TOTAL
+        // calculate order total
+        $scope.calculateTotal = function () {
+            $scope.loading = true;
+
+            Foods.calculate()
+                .success(function (data) {
+                    $scope.loading = false;
+                    $scope.total = data; // assign our new list of foods
                 });
         };
     }]);
