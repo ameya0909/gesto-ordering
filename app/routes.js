@@ -29,11 +29,13 @@ module.exports = function (app) {
         });
     });
 
+
     // get all foods to display on home page
     app.get('/api/food', function (req, res) {
         // use mongoose to get all foods from order collection in the database
         getOrder(res);
     });
+
 
     // create order and send back all foods after creation
     app.post('/api/food', function (req, res) {
@@ -64,18 +66,18 @@ module.exports = function (app) {
     });
 
 
-
-    // delete a todo
-    app.delete('/api/todos/:todo_id', function (req, res) {
-        Todo.remove({
-            _id: req.params.todo_id
-        }, function (err, todo) {
+    // delete a food
+    app.delete('/api/food/:food_id', function (req, res) {
+        Order.remove({
+            _id: req.params.food_id
+        }, function (err, food) {
             if (err)
                 res.send(err);
 
-            getTodos(res);
+            getOrder(res);
         });
     });
+
 
     // application -------------------------------------------------------------
     app.get('*', function (req, res) {

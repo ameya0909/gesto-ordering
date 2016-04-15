@@ -75,7 +75,7 @@
             <!-- LOOP OVER THE FOODS IN $scope.foods -->
             <div class="checkbox" ng-repeat="food in foods">
                 <label>
-                    <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ food.name }} &nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" ng-click="deleteTodo(food._id)"> {{ food.name }} &nbsp;&nbsp;&nbsp;
                     {{food.price | currency}}
                 </label>
             </div>

@@ -44,15 +44,15 @@ angular.module('mainController', [])
         };
 
         // DELETE ==================================================================
-        // delete a todo after checking it
-        $scope.deleteTodo = function (id) {
+        // delete a food after checking it
+        $scope.deleteFood = function (id) {
             $scope.loading = true;
 
-            Todos.delete(id)
-                // if successful creation, call our get function to get all the new todos
+            Foods.delete(id)
+                // if successful creation, call our get function to get all the new foods
                 .success(function (data) {
                     $scope.loading = false;
-                    $scope.todos = data; // assign our new list of todos
+                    $scope.foods = data; // assign our new list of foods
                 });
         };
     }]);
