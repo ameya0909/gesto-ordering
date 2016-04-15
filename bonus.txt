@@ -1,0 +1,6 @@
+1. Added Clear Order button which deletes all food items from foods collection. 
+This can be used to cancel an order by the user or to start a new order after previous order is completed.
+
+2. Added quantity property to food items.
+This can be used to enter the quantity of individual food items purchased by the customer so that user need not have
+to select the same food item from the dropdown repeatedly. Also reflects in calculating the total of the order.

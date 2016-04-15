@@ -42,6 +42,8 @@ module.exports = function (app) {
         //console.log(req.body.name);
         // create a food order, information comes from AJAX request from Angular
         var name = req.body.name;
+        var quantity = req.body.quantity;
+
         // find food from menu collection matching the name selected from dropdown
         var query = Menu.findOne({'name': name});
 
@@ -54,7 +56,8 @@ module.exports = function (app) {
 
             Order.create({
                 name: name,
-                price: item.price
+                price: item.price,
+                quantity: quantity
             }, function (err, order) {
                 if (err)
                     res.send(err);
@@ -78,7 +81,7 @@ module.exports = function (app) {
         });
     });
 
-    // cacluate total
+    // calculate total
     app.get('/api/total', function (req, res) {
 
         Order.find(function (err, foods) {
@@ -91,7 +94,7 @@ module.exports = function (app) {
             var subTotal = 0;
             for (var i = 0; i < foods.length; i++) {
                 var food = foods[i];
-                subTotal += food.price;
+                subTotal += (food.price * food.quantity);
             }
             var total = subTotal + (0.075 * subTotal);
             res.json({total: total});

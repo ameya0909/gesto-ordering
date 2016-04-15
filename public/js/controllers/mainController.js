@@ -55,6 +55,10 @@ angular.module('mainController', [])
                     $scope.loading = false;
                     $scope.foods = data; // assign our new list of foods
                     $scope.calculateTotal();
+                    if ($scope.foods.length === 0) {
+                        $scope.item.name = "Pizza";
+                        $scope.item.quantity = 1;
+                    }
                 });
         };
 
@@ -81,6 +85,8 @@ angular.module('mainController', [])
                     $scope.loading = false;
                     $scope.foods = data; // assign our new list of foods
                     $scope.calculateTotal();
+                    $scope.item.name = "Pizza";
+                    $scope.item.quantity = 1;
                 });
         };
     }]);

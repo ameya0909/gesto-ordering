@@ -65,8 +65,15 @@
         <div class="col-sm-8 col-sm-offset-2 text-center">
             <form>
                 <div class="form-group">
-                    <select class="form-control" ng-model="item.name">
+                    <label>Food Name</label>
+                    <select class="form-control" ng-init="item.name = item.name || 'Pizza'" ng-model="item.name">
                         <option ng-repeat="item in menu" ng-value="item.name">{{item.name}}</option>
+                    </select>
+                    <br>
+                    <label>Food Quantity</label>
+                    <select class="form-control" ng-init="item.quantity = item.quantity || '1'"
+                            ng-model="item.quantity">
+                        <option ng-repeat="n in [1,2,3,4,5,6,7,8,9,10]" ng-value="n">{{n}}</option>
                     </select>
                 </div>
 
@@ -82,16 +89,30 @@
     <div id="order-list" class="row">
         <div class="col-sm-4 col-sm-offset-4">
 
-            <h2 align="center">Your Order</h2>
+            <h2 class="text-center">Your Order</h2>
 
-            <!-- LOOP OVER THE FOODS IN $scope.foods -->
-            <div ng-repeat="food in foods">
+            <table class="table table-bordered">
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Base Price</th>
+                    <th>Quantity</th>
+                    <th>SubTotal</th>
+                </tr>
 
-                <p style="font-size: large">
-                    <button class="btn btn-danger btn-sm" ng-click="deleteFood(food._id)">Remove</button>
-                    &nbsp;&nbsp;&nbsp; {{ food.name }} &nbsp;&nbsp;&nbsp; {{food.price | currency}}
-                </p>
-            </div>
+                <tr ng-repeat="food in foods">
+                    <!-- LOOP OVER THE FOODS IN $scope.foods -->
+                    <td>
+                        <button class="btn btn-danger btn-sm" ng-click="deleteFood(food._id)">Remove</button>
+                    </td>
+                    <td>{{ food.name }}</td>
+                    <td>{{food.price | currency}}</td>
+                    <td class="text-center">{{food.quantity}}</td>
+                    <td>{{food.quantity * food.price | currency}}</td>
+                </tr>
+
+            </table>
+
             <br>
             <p style="font-size: large" align="right" ng-hide="total.total===0">Tax: 9.5%</p>
             <h3>Total: {{total.total | currency}} </h3>
@@ -101,7 +122,6 @@
 
         </div>
     </div>
-
 
 </div>
 
